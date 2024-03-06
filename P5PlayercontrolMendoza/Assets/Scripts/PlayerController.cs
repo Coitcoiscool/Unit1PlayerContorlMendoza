@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,11 +10,14 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
     private float forwardInput;
+    public Camera hoodCamera;
+    public Camera mainCamera;
+    public KeyCode switchKey;
     // Start is called before the first frame update
-    void Start()
-    {
+   
+    
         
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -23,5 +27,11 @@ public class PlayerController : MonoBehaviour
         //move the vehicle forward 
         transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput );
         transform.Rotate(Vector3.up, turnSpeed * horizontalInput * Time.deltaTime );
+
+        if (Input.GetKeyDown(switchKey))
+        {
+            mainCamera.enabled = !mainCamera.enabled;
+            hoodCamera.enabled = !hoodCamera.enabled;
+        }
     }
 }
